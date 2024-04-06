@@ -156,6 +156,22 @@ abstract class JTask extends \Robo\Tasks implements TaskInterface, VerbosityThre
     }
 
     /**
+     * Get the extension name prefix for the zip file
+     *
+     * @return  string
+     *
+     * @since   1.0
+     */
+    public function getZipPrefix()
+    {
+        if (empty($this->getJConfig()->zip_prefix)) {
+            return '';
+        }
+
+        return trim(strtolower($this->getJConfig()->zip_prefix));
+    }
+
+    /**
      * Get the extension name
      *
      * @return  string

@@ -33,7 +33,7 @@ class Zip extends Base
     {
         parent::__construct($params);
 
-        $this->target = $this->params['base'] . "/dist/" . $this->getExtensionName() . "-" . $this->getJConfig()->version . ".zip";
+        $this->target = $this->params['base'] . "/dist/" . $this->getZipPrefix() . $this->getExtensionName() . "-" . $this->getJConfig()->version . ".zip";
         $this->zip    = new \ZipArchive();
     }
 
