@@ -51,7 +51,11 @@ class Plugin extends Base
         $this->plgType = $type;
 
         $this->source = $this->getSourceFolder() . "/plugins/" . $type . "/" . $name;
-        $this->target = $this->getBuildFolder() . "/plugins/" . $type . "/" . $name;
+        $this->target = $this->getBuildFolder();
+
+        if ($this->getJConfig()->package) {
+            $this->target = $this->getBuildFolder() . "/plugins/" . $type . "/" . $name;
+        }
     }
 
     /**

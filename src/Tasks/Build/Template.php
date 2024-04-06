@@ -47,7 +47,11 @@ class Template extends Base
         $this->templateName = $templateName;
 
         $this->source = $this->getSourceFolder() . "/templates/" . $templateName;
-        $this->target = $this->getBuildFolder() . "/templates/" . $templateName;
+        $this->target = $this->getBuildFolder();
+
+        if ($this->getJConfig()->package) {
+            $this->target = $this->getBuildFolder() . "/templates/" . $templateName;
+        }
     }
 
     /**

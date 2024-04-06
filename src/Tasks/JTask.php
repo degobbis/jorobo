@@ -266,11 +266,28 @@ abstract class JTask extends \Robo\Tasks implements TaskInterface, VerbosityThre
 
         $jConfig->buildFolder = $this->params['base'] . $this->determineTarget($jConfig);
         $jConfig->params      = $params;
+        $jConfig->package     = $this->isPackageDeploy($jConfig);
 
         self::$jConfig = $jConfig;
 
         // Date set
         date_default_timezone_set('UTC');
+    }
+
+    /**
+     * Check if we are building a package
+     *
+     * @param   object  $jConfig  The JoRobo config
+     *
+     * @return  boolean
+     *
+     * @since   1.0
+     */
+    private function isPackageDeploy($jConfig)
+    {
+        $deploys = explode(' ', strtolower($jConfig->target));
+
+        return (in_array('package', $deploys) || !empty($jConfig->package));
     }
 
     /**

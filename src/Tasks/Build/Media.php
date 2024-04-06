@@ -49,11 +49,14 @@ class Media extends Base
         $target = $this->getBuildFolder() . "/" . $folder;
 
         if ($this->type == 'mod') {
-            $target = $this->getBuildFolder() . "/modules/" . $extName . "/" . $folder;
+            if ($this->getJConfig()->package) {
+                $target = $this->getBuildFolder() . "/modules/" . $extName . "/" . $folder;
+            }
         } elseif ($this->type == 'plg') {
-            $a = explode("_", $this->extName);
-
-            $target = $this->getBuildFolder() . "/plugins/" . $a[1] . "/" . $a[2] . "/" . $folder;
+            if ($this->getJConfig()->package) {
+                $a      = explode("_", $this->extName);
+                $target = $this->getBuildFolder() . "/plugins/" . $a[1] . "/" . $a[2] . "/" . $folder;
+            }
         } elseif ($this->type == 'lib') {
             // Remove lib before - ugly hack
             $ex = str_replace("lib_", "", $this->extName);

@@ -47,7 +47,11 @@ class Module extends Base
         $this->modName = $modName;
 
         $this->source = $this->getSourceFolder() . "/modules/" . $modName;
-        $this->target = $this->getBuildFolder() . "/modules/" . $modName;
+        $this->target = $this->getBuildFolder();
+
+        if ($this->getJConfig()->package) {
+            $this->target = $this->getBuildFolder() . "/modules/" . $modName;
+        }
     }
 
     /**
