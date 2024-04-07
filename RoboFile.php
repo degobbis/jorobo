@@ -14,6 +14,13 @@ if (!defined('JPATH_BASE')) {
     define('JPATH_BASE', __DIR__);
 }
 
+// A quick & dirty fix for non-GNU distributions see https://wiki.musl-libc.org/projects-using-musl
+// It is used by ZIP, but not utilized, so this fix makes no difference when building the packages.
+// A possible workaround could be: https://www.php.de/forum/webentwicklung/php-fortgeschrittene/1475202-ersatzfunktion-für-glob_brace-funktionalität?p=1475504#post1475504
+if (!defined('GLOB_BRACE')) {
+    define('GLOB_BRACE', 0);
+}
+
 // PSR-4 Autoload by composer
 require_once JPATH_BASE . '/vendor/autoload.php';
 
