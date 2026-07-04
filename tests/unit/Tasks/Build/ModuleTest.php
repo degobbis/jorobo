@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 use Robo\Traits\TestTasksTrait;
 use Symfony\Component\Filesystem\Filesystem;
 
-class ComponentTest extends TestCase
+class ModuleTest extends TestCase
 {
     use TestTasksTrait;
     use Tasks;
@@ -28,14 +28,12 @@ class ComponentTest extends TestCase
         $fs->remove(JPATH_BASE . '/test-weblinks/dist');
     }
 
-    public function testBuildComponent()
+    public function testBuildModule()
     {
-        $result = $this->buildComponent('weblinks', ['base' => JPATH_BASE . '/test-weblinks'])
+        $result = $this->buildModule('weblinks', ['base' => JPATH_BASE . '/test-weblinks'])
             ->run();
         $this->assertTrue($result->wasSuccessful(), $result->getMessage());
-        $this->assertDirectoryExists(JPATH_BASE . '/test-weblinks/dist/weblinks-5.0.0-dev/components/com_weblinks');
-        $this->assertDirectoryExists(JPATH_BASE . '/test-weblinks/dist/weblinks-5.0.0-dev/administrator/components/com_weblinks');
-        $this->assertFileExists(JPATH_BASE . '/test-weblinks/dist/weblinks-5.0.0-dev/weblinks.xml');
-        $this->assertFileExists(JPATH_BASE . '/test-weblinks/dist/weblinks-5.0.0-dev/script.php');
+        $this->assertDirectoryExists(JPATH_BASE . '/test-weblinks/dist/weblinks-5.0.0-dev/modules/mod_weblinks');
+        $this->assertFileExists(JPATH_BASE . '/test-weblinks/dist/weblinks-5.0.0-dev/modules/mod_weblinks/mod_weblinks.xml');
     }
 }
