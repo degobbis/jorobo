@@ -75,6 +75,19 @@ class Build extends JTask
             }
         }
 
+        // Create symlink to current extension
+        $symlinkFileBase = $this->params['base'] . '/dist/'
+            . $this->getJConfig()->zip_prefix . $this->getJConfig()->extension;
+
+        if (is_file($symlinkFileBase . '-current.zip')) {
+            unlink($symlinkFileBase . '-current.zip');
+        }
+
+        $this->taskFilesystemStack()
+            ->symlink($symlinkFileBase . '-' . $this->getJConfig()->version . '.zip',
+                      $symlinkFileBase . '-current.zip')
+            ->run();
+
         return Result::success($this, 'Build successful');
     }
 
